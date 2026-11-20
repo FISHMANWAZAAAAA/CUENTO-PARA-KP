@@ -1,0 +1,310 @@
+
+/* ==============================
+   CONFIGURACIÓN GENERAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Courier New", Courier, monospace;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    background: #e0e4ee;
+}
+
+/* ==============================
+   IMÁGENES
+================================ */
+
+img {
+    height: auto;
+    max-width: 100%;
+    border-radius: 20px;
+}
+
+.imgs {
+    height: auto;
+    max-width: 100%;
+    border-radius: 20px;
+}
+
+/* ==============================
+   LIBRO
+================================ */
+
+.book {
+    position: relative;
+
+    width: 260px;
+    height: 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+    perspective: 1000px;
+
+    transform-origin: center center;
+    scale: 1;
+
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* ==============================
+   ANIMACIÓN CON CURSOR
+================================ */
+
+/* Solo dispositivos que realmente tienen cursor */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .book:hover .cover {
+        transform: rotateX(10deg) rotateY(-180deg);
+    }
+
+    .book:hover .page {
+        transform: rotateX(10deg) rotateY(-180deg);
+        z-index: 2;
+    }
+
+}
+
+/* ==============================
+   ANIMACIÓN CON TOQUE O CLIC
+================================ */
+
+.book.open .cover {
+    transform: rotateX(10deg) rotateY(-180deg);
+}
+
+.book.open .page {
+    transform: rotateX(10deg) rotateY(-180deg);
+    z-index: 2;
+}
+
+/* ==============================
+   PORTADA Y CONTRAPORTADA
+================================ */
+
+.cover {
+    z-index: 1;
+    transition: all 3s;
+}
+
+.back-cover {
+    z-index: -2;
+}
+
+.cover,
+.back-cover {
+    height: 300px;
+    width: 260px;
+
+    background: #1c7b93;
+
+    border-radius: 2px 20px 20px 2px;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    box-shadow: 1px 1px 10px gray;
+
+    transform: rotateX(10deg);
+    transform-origin: center left;
+}
+
+/* ==============================
+   PÁGINAS
+================================ */
+
+.page,
+.last-page {
+    height: 280px;
+    width: 250px;
+
+    background: #FFFFFF;
+
+    position: absolute;
+
+    top: 10px;
+    left: 0;
+
+    border-radius: 2px 10px 10px 2px;
+
+    transform: rotateX(10deg);
+    transform-origin: center left;
+
+    z-index: -1;
+}
+
+/* ==============================
+   TIEMPOS DE ANIMACIÓN
+================================ */
+
+.page:nth-child(2) {
+    transition-duration: 3s;
+}
+
+.page:nth-child(3) {
+    transition-duration: 2.6s;
+}
+
+.page:nth-child(4) {
+    transition-duration: 2.2s;
+}
+
+.page:nth-child(5) {
+    transition-duration: 1.8s;
+}
+
+.page:nth-child(6) {
+    transition-duration: 1.4s;
+}
+
+/* Tiempos al abrir */
+
+.book:hover .page:nth-child(2),
+.book.open .page:nth-child(2) {
+    transition-duration: 6s;
+}
+
+.book:hover .page:nth-child(3),
+.book.open .page:nth-child(3) {
+    transition-duration: 5.6s;
+}
+
+.book:hover .page:nth-child(4),
+.book.open .page:nth-child(4) {
+    transition-duration: 5.2s;
+}
+
+.book:hover .page:nth-child(5),
+.book.open .page:nth-child(5) {
+    transition-duration: 4.8s;
+}
+
+.book:hover .page:nth-child(6),
+.book.open .page:nth-child(6) {
+    transition-duration: 4.4s;
+}
+
+/* ==============================
+   ÚLTIMA PÁGINA
+================================ */
+
+.last-page img {
+    width: 150px;
+    max-width: 85%;
+
+    display: block;
+
+    margin: 20px auto;
+
+    position: relative;
+    z-index: 0;
+}
+
+.last-page h2 {
+    text-align: center;
+    font-size: 32px;
+}
+
+/* ==============================
+   TABLETS
+================================ */
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+
+    .book {
+        scale: 0.95;
+    }
+
+}
+
+/* ==============================
+   CELULARES
+================================ */
+
+@media screen and (max-width: 600px) {
+
+    /* Cerrado: tamaño original */
+    .book {
+        scale: 1;
+    }
+
+    /* Abierto: permite visualizar las dos mitades */
+    .book.open {
+        scale: 0.68;
+    }
+
+    .last-page img {
+        width: 140px;
+    }
+
+}
+
+/* ==============================
+   CELULARES PEQUEÑOS
+================================ */
+
+@media screen and (max-width: 380px) {
+
+    .book {
+        scale: 1;
+    }
+
+    .book.open {
+        scale: 0.64;
+    }
+
+}
+
+/* ==============================
+   PANTALLAS CON POCA ALTURA
+================================ */
+
+@media screen and (max-height: 450px) {
+
+    .book {
+        scale: 0.85;
+    }
+
+    .book.open {
+        scale: 0.65;
+    }
+
+}
+
+@media screen and (max-height: 350px) {
+
+    .book {
+        scale: 0.70;
+    }
+
+    .book.open {
+        scale: 0.55;
+    }
+
+}
